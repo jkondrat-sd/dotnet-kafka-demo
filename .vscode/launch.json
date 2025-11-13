@@ -1,0 +1,14 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch OrderProducer.Api",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "build",
+      "program": "${workspaceFolder}/OrderProducer.Api/bin/Debug/net8.0/OrderProducer.Api.dll",
+      "cwd": "${workspaceFolder}/OrderProducer.Api",
+      "console": "internalConsole"
+    }
+  ]
+}

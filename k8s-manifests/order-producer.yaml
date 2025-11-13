@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-producer
+  namespace: dotnet-kafka-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order-producer
+  template:
+    metadata:
+      labels:
+        app: order-producer
+    spec:
+      containers:
+        - name: order-producer
+          image: dotnet-kafka-demo/orderproducer:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          env:
+            - name: Kafka__BootstrapServers
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: KAFKA_BOOTSTRAP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-producer-svc
+  namespace: dotnet-kafka-demo
+spec:
+  type: NodePort
+  selector:
+    app: order-producer
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30080

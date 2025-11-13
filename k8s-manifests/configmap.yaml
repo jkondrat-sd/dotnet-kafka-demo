@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: dotnet-kafka-demo
+data:
+  KAFKA_BOOTSTRAP: "kafka:9092"
